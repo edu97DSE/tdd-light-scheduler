@@ -38,6 +38,7 @@ SRC_DIRS += \
 
 TEST_SRC_DIRS += \
 	Testing/Tests \
+	Testing/Doubles \
 	Testing/Mocks
 
 INCLUDE_DIRS += \

@@ -23,7 +23,12 @@ typedef struct
 
 typedef struct
 {
-   Schedule_t schedules[MAX_SCHEDULES];
+   struct
+   {
+      Schedule_t schedules[MAX_SCHEDULES];
+      I_DigitalOutputGroup_t *lights;
+      I_TimeSource_t *timeSource;
+   } _private;
 } LightScheduler_t;
 
 /*!

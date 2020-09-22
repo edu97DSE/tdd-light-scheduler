@@ -13,28 +13,37 @@ extern "C"
 #include "DigitalOutputGroup_Mock.h"
 #include "TimeSource_Mock.h"
 #include "uassert_test.h"
+#include "TimeSource_TestDouble.h"
+
+#define Given
 
 TEST_GROUP(LightScheduler)
 {
-   LightScheduler_t scheduler;
+   LightScheduler_t instance;
 
    DigitalOutputGroup_Mock_t fakeDigitalOutputGroup;
-   TimeSource_Mock_t fakeTimeSource;
+   TimeSource_TestDouble_t fakeTimeSource;
 
    void setup()
    {
       DigitalOutputGroup_Mock_Init(&fakeDigitalOutputGroup);
-      TimeSource_Mock_Init(&fakeTimeSource);
-
-//      LightScheduler_Init(&scheduler, (I_DigitalOutputGroup_t *)&fakeDigitalOutputGroup, (I_TimeSource_t *)&fakeTimeSource);
+      TimeSource_TestDouble_Init(&fakeTimeSource);
    }
 
    void teardown()
    {
    }
+
+   void TheModuleIsInitialized(void)
+   {
+      LightScheduler_Init(
+         &instance,
+         &fakeDigitalOutputGroup.interface,
+         &fakeTimeSource.interface);
+   }
 };
 
-TEST(LightScheduler, FirstTest)
+TEST(LightScheduler, ModuleShouldBeInitialized)
 {
-   FAIL("Oh good the tests are working");
+   Given TheModuleIsInitialized();
 }
